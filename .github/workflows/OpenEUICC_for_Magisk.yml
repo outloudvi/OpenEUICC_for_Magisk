@@ -37,5 +37,4 @@ jobs:
       with:
         name: build-output
         path: |
-          output/${{ env.output_magisk_module_filename }}
-          output/${{ env.output_apk_unpriv_filename }}
+          output
