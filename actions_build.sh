@@ -1,9 +1,7 @@
 set -e
 source mysercetfile
 echo 0 > flag_change
-gh config set -h github.com git_protocol https
-echo "$repo_openeuicc_github_token_t" | gh auth login --with-token
-gh repo clone hzy132/OpenEUICC_for_Magisk
+git clone https://github.com/hzy132/OpenEUICC_for_Magisk
 cd OpenEUICC_for_Magisk
 recorded_commit=`cat commit-openeuicc`
 date > .temp
@@ -11,8 +9,6 @@ git config --global user.name "hzy132"
 git config --global user.email "35918116+hzy132@users.noreply.github.com"
 git add .temp
 git commit -m "useless file"
-git remote set-url origin https://x-access-token:$repo_openeuicc_github_token_t@github.com/hzy132/OpenEUICC_for_Magisk.git
-git push origin main
 cd ..
 git clone https://gitea.angry.im/PeterCxy/OpenEUICC.git
 cd OpenEUICC
@@ -25,8 +21,6 @@ then
   echo "$now_commit" > commit-openeuicc
   git add commit-openeuicc
   git commit -m "Update the latest commit hash of OpenEUICC"
-  git remote set-url origin https://x-access-token:$repo_openeuicc_github_token_t@github.com/hzy132/OpenEUICC_for_Magisk.git
-  git push origin main
   cd ../OpenEUICC
   echo "$key_file_openeuicc_base" | base64 -d > openeuicc.jks
   echo "$key_file_keystore_properties_half_base" | base64 -d > keystore.properties
@@ -83,21 +77,5 @@ then
   releasemodulefilename="OpenEUICC-Magisk_module-"$version_t2"."$versioncode".zip"
   updatejsontemp=${updatejsontemp_t3/OpenEUICC_Magisk_module_filename/$releasemodulefilename}
   updatejson_now=`cat OpenEUICC_for_Magisk/magisk-module/updateJson`
-  if [ "$updatejsontemp" != "$updatejson_now" ]
-  then
-    cd OpenEUICC_for_Magisk
-    echo "$updatejsontemp" > magisk-module/updateJson
-    git add magisk-module/updateJson
-    git commit -m "Update info for the latest version"
-    git remote set-url origin https://x-access-token:$repo_openeuicc_github_token_t@github.com/hzy132/OpenEUICC_for_Magisk.git
-    git push origin main
-    cd magisk-module
-    cp updateJson update.json
-    cd ..
-    git add magisk-module/update.json
-    git commit -m "Update info for the latest version"
-    git remote set-url origin https://x-access-token:$repo_openeuicc_github_token_t@github.com/hzy132/OpenEUICC_for_Magisk.git
-    git push origin main
-  fi
 fi
 

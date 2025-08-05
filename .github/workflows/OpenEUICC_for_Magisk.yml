@@ -2,8 +2,7 @@ name: OpenEUICC_for_Magisk
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '40 9 * * *'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,10 +20,8 @@ jobs:
 
     - name: set sercet
       run: |
-        repo_openeuicc_github_token_t=${{ secrets.REPO_OPENEUICC_GITHUB_TOKEN }}
         key_file_openeuicc_base=${{ secrets.KEY_FILE_OPENEUICC }}
         key_file_keystore_properties_half_base=${{ secrets.KEY_FILE_KEYSTORE_PROPERTIES_HALF }}
-        echo "repo_openeuicc_github_token_t=""$repo_openeuicc_github_token_t" > mysercetfile
         echo "key_file_openeuicc_base=""$key_file_openeuicc_base" >> mysercetfile
         echo "key_file_keystore_properties_half_base=""$key_file_keystore_properties_half_base" >> mysercetfile
       
@@ -53,15 +50,3 @@ jobs:
         path: |
           output/${{ env.output_magisk_module_filename }}
           output/${{ env.output_apk_unpriv_filename }}
-
-    - name: releases
-      if: ${{ env.env_flag_change == '1' }}
-      uses: ncipollo/release-action@v1
-      with:
-        artifacts: "output/${{ env.output_magisk_module_filename }},output/${{ env.output_apk_unpriv_filename }}"
-        bodyFile: "output/release_bodyfile"
-        name: "${{ env.version_str_commit }}"
-        tag: "${{ env.version_str_commit }}"
-        commit: "main"
-        token: "${{ secrets.REPO_OPENEUICC_GITHUB_TOKEN }}"
-        
