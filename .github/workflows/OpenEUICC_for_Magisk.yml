@@ -33,7 +33,6 @@ jobs:
         if [ "$str_flag_change" = "1" ]; then echo "env_flag_change=1" >> $GITHUB_ENV; else echo "env_flag_change=0" >> $GITHUB_ENV; fi
         
     - name: output info data
-      if: ${{ env.env_flag_change == '1' }}
       run: |
         output_apk_unpriv_filename=`cat output/apk_unpriv_filename`
         output_magisk_module_filename=`cat output/magisk_module_filename`
@@ -43,7 +42,6 @@ jobs:
         echo "version_str_commit=$version_str_commit" >> $GITHUB_ENV
     
     - name: upload artifact
-      if: ${{ env.env_flag_change == '1' }}
       uses: actions/upload-artifact@v4
       with:
         name: build-output
