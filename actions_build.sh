@@ -15,8 +15,7 @@ cd OpenEUICC
 now_commit=`git rev-parse HEAD`
 now_commit_short=`git rev-parse --short HEAD`
 cd ../OpenEUICC_for_Magisk
-if [ "$now_commit" != "$recorded_commit" ]
-then
+
   echo 1 > ../flag_change
   echo "$now_commit" > commit-openeuicc
   git add commit-openeuicc
@@ -77,5 +76,3 @@ then
   releasemodulefilename="OpenEUICC-Magisk_module-"$version_t2"."$versioncode".zip"
   updatejsontemp=${updatejsontemp_t3/OpenEUICC_Magisk_module_filename/$releasemodulefilename}
   updatejson_now=`cat OpenEUICC_for_Magisk/magisk-module/updateJson`
-fi
-
