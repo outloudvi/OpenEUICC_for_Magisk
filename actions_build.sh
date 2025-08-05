@@ -8,7 +8,6 @@ date > .temp
 git config --global user.name "hzy132"
 git config --global user.email "35918116+hzy132@users.noreply.github.com"
 git add .temp
-git commit -m "useless file"
 cd ..
 git clone https://gitea.angry.im/PeterCxy/OpenEUICC.git
 cd OpenEUICC
@@ -19,7 +18,6 @@ cd ../OpenEUICC_for_Magisk
   echo 1 > ../flag_change
   echo "$now_commit" > commit-openeuicc
   git add commit-openeuicc
-  git commit -m "Update the latest commit hash of OpenEUICC"
   cd ../OpenEUICC
   echo "$key_file_openeuicc_base" | base64 -d > openeuicc.jks
   echo "$key_file_keystore_properties_half_base" | base64 -d > keystore.properties
