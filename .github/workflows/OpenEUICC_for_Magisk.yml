@@ -31,15 +31,6 @@ jobs:
         ./actions_build.sh
         str_flag_change=`cat flag_change`
         if [ "$str_flag_change" = "1" ]; then echo "env_flag_change=1" >> $GITHUB_ENV; else echo "env_flag_change=0" >> $GITHUB_ENV; fi
-        
-    - name: output info data
-      run: |
-        output_apk_unpriv_filename=`cat output/apk_unpriv_filename`
-        output_magisk_module_filename=`cat output/magisk_module_filename`
-        version_str_commit=`cat output/version_str_commit`
-        echo "output_apk_unpriv_filename=$output_apk_unpriv_filename" >> $GITHUB_ENV
-        echo "output_magisk_module_filename=$output_magisk_module_filename" >> $GITHUB_ENV
-        echo "version_str_commit=$version_str_commit" >> $GITHUB_ENV
     
     - name: upload artifact
       uses: actions/upload-artifact@v4
